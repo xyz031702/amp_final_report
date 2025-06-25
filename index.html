@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed with Discipline: AMP 2025 Framework</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mit-crimson: #ff6b6b;
+            --ink: #ffffff;
+            --gray-1: #1a1a1a;
+            --gray-2: #2a2a2a;
+            --gray-3: #404040;
+            --bg: #1e1e1e;
+            --text: #e4e6ea;
+            --accent: #64ffda; /* Cyan accent */
+            --warning-bg: #2d1b1b;
+            --warning-border: #ff6b6b;
+            --quote-bg: #1e2a2a;
+            --quote-border: #64ffda;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            background: var(--gray-1);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin-inline: auto;
+            background: var(--bg);
+            padding: 3rem 2rem 4rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 50%, #1a1a1a 100%);
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(100, 255, 218, 0.03) 50%, transparent 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(255, 107, 107, 0.02) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header .mit-logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 120px;
+            filter: brightness(1.2) drop-shadow(0 2px 8px rgba(100, 255, 218, 0.3));
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: linear-gradient(135deg, var(--accent), var(--mit-crimson));
+            color: #000;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            text-shadow: none;
+        }
+
+        .section {
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 1.4rem;
+            color: var(--ink);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--mit-crimson);
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem 3rem;
+            align-items: start;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .card {
+            background: var(--gray-2);
+            border-radius: 8px;
+            padding: 1.5rem 1.7rem;
+            border: 1px solid var(--gray-3);
+        }
+
+        .card h3, .card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--ink);
+        }
+
+        .card ol, .card ul {
+            padding-left: 1.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--quote-border);
+            padding: 1rem 1.2rem;
+            background: var(--quote-bg);
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .warning {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            padding: 1rem 1.2rem;
+            border-radius: 6px;
+            color: #fff;
+            margin-top: 1rem;
+        }
+
+        .gap-list {
+            background: var(--bg);
+            border: 1px solid var(--gray-3);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .gap-list h4 {
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .gap-list ol {
+            padding-left: 1.4rem;
+        }
+
+        .gap-list li {
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .action-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .action-section ul, .action-section ol {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .action-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .external-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .external-link:hover {
+            text-decoration: underline;
+        }
+
+        .outcome {
+            text-align: center;
+        }
+
+        .outcome p {
+            max-width: 700px;
+            margin-inline: auto;
+            margin-top: 1rem;
+        }
+
+        .disciplines-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .sub-section {
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .sub-section h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sub-section ul {
+            margin-left: 0.5rem;
+        }
+
+        .agile-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .agile-stage {
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .stage-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-icon {
+            font-size: 1.5rem;
+        }
+
+        .stage-name {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .discipline-check {
+            background: var(--gray-2);
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--mit-crimson);
+        }
+
+        .flow-connector {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin: 0 0.5rem;
+        }
+
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .outcome-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .outcome-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .outcome-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .outcome-item p {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .container {
+                margin: 1rem;
+                padding: 2rem 1.2rem 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header .mit-logo {
+                width: 90px;
+            }
+
+            .container {
+                padding: 2rem 1.2rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <img src="mit_logo.png" alt="MIT Logo" class="mit-logo">
+            <h1>Speed with Discipline</h1>
+        </header>
+        
+        <!-- Team Pain -->
+        <section class="section" id="team-pain">
+            <h2 class="section-title">Team Pain</h2>
+            
+            <div class="grid-2">
+                <figure>
+                    <img src="amp2025_final.drawio.png" alt="AMP 2025 Framework Diagram">
+                </figure>
+                
+                <div>
+                    <div class="gap-list">
+                        <h4>Two Critical Operational Gaps:</h4>
+                        <ol>
+                            <li><strong>Communication gap:</strong> Insufficient transfer of product knowledge and unique selling points to sales team</li>
+                            <li><strong>Misaligned sales strategy:</strong> Sales team applies 'use hammer to find nails' approach to customer acquisition</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="warning">
+                        <strong>⚠️ Vicious Cycle:</strong> These gaps create negative feedback loops where poor sales results increase pressure for speed, further deteriorating communication and strategic alignment.
+                    </div>
+                    
+                    <div class="quote">
+                        "Speed without discipline is debt; discipline without speed is irrelevance."
+                        <br><em>—AMP Week 1 Lessons Learned</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- AMP Disciplines -->
+        <section class="section" id="amp-disciplines">
+            <h2 class="section-title">AMP Disciplines</h2>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Disciplined Entrepreneurship</h4>
+                    <p>MIT Sloan's proven framework for startup success. <a href="https://mitsloan.mit.edu/ideas-made-to-matter/disciplined-entrepreneurship-6-questions-startup-success" class="external-link" target="_blank">Learn more →</a></p>
+                    
+                    <ol>
+                        <li><strong>Customer Identity:</strong> Who is your customer?</li>
+                        <li><strong>Value Proposition:</strong> What can you do for your customers?</li>
+                        <li><strong>Acquisition:</strong> How does your customer acquire your product?</li>
+                        <li><strong>Revenue Model:</strong> How do you make money off your product?</li>
+                        <li><strong>Product Design:</strong> How do you design and build your product?</li>
+                        <li><strong>Scale Strategy:</strong> How do you scale your business?</li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <h4>Strategy Shapes Team</h4>
+                    <ol>
+                        <li>Step up, Step back</li>
+                        <li>Slack for team to think, to avoid "hamster running"</li>
+                    </ol>
+                    
+                    <p>Create strategic space for teams to think critically and avoid reactive "hamster wheel" execution patterns. Provide adequate slack time for reflection, planning, and strategic thinking.</p>
+                </div>
+                
+                <div class="card">
+                    <h4>Use Tools to Amplify Team</h4>
+                    <ol>
+                        <li>Visual Strategy Thinking (VTS)</li>
+                        <li>AI (ChatGPT, JetPack)</li>
+                        <li>Business Simulation</li>
+                        <li>Jira & Agile</li>
+                    </ol>
+                    
+                    <p>Leverage advanced tools to enhance team capabilities rather than replace human judgment and strategic thinking.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Men et Manus -->
+        <section class="section" id="actions">
+            <h2 class="section-title">Men et Manus: Speed with Discipline</h2>
+            <p class="section-subtitle">AI-Accelerated Agile with Discipline Checkpoints</p>
+            
+            <div class="card action-section">
+                <h3>🚀 Speed: AI-Accelerated Agile Stages</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4>📋 Planning & Discovery</h4>
+                        <ul>
+                            <li><strong>AI Sprint Planning:</strong> Intelligent epic breakdown and story estimation</li>
+                            <li><strong>MIT Jetpack:</strong> Rapid idea validation and feasibility assessment</li>
+                            <li><strong>AI Market Research:</strong> Automated competitor analysis and customer insights</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>💻 Development & Delivery</h4>
+                        <ul>
+                            <li><strong>AI Coding Assistants:</strong> Accelerated development with intelligent code suggestions</li>
+                            <li><strong>Automated Testing:</strong> AI-powered test generation and execution</li>
+                            <li><strong>Continuous Integration:</strong> Smart deployment pipelines with predictive quality checks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card action-section">
+                <h3>⚖️ Discipline: Validation Checkpoints in Agile Flow</h3>
+                <div class="agile-flow">
+                    <div class="agile-stage">
+                        <div class="stage-header">
+                            <span class="stage-icon">📊</span>
+                            <span class="stage-name">Planning</span>
+                        </div>
+                        <div class="discipline-check">✅ Customer validation before sprint commitment</div>
+                    </div>
+                    
+                    <div class="flow-connector">→</div>
+                    
+                    <div class="agile-stage">
+                        <div class="stage-header">
+                            <span class="stage-icon">⚡</span>
+                            <span class="stage-name">Sprint</span>
+                        </div>
+                        <div class="discipline-check">✅ Daily progress vs customer impact metrics</div>
+                    </div>
+                    
+                    <div class="flow-connector">→</div>
+                    
+                    <div class="agile-stage">
+                        <div class="stage-header">
+                            <span class="stage-icon">🎯</span>
+                            <span class="stage-name">Review</span>
+                        </div>
+                        <div class="discipline-check">✅ Sales team validation before next iteration</div>
+                    </div>
+                    
+                    <div class="flow-connector">→</div>
+                    
+                    <div class="agile-stage">
+                        <div class="stage-header">
+                            <span class="stage-icon">🔄</span>
+                            <span class="stage-name">Retro</span>
+                        </div>
+                        <div class="discipline-check">✅ Process improvement with data-driven decisions</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card action-section">
+                <h3>🎯 Result: Sustainable Team Excellence</h3>
+                <div class="outcome-grid">
+                    <div class="outcome-item">
+                        <div class="outcome-icon">🤖</div>
+                        <h4>AI-Augmented Teams</h4>
+                        <p>Each member equipped with specialized AI tools for their domain</p>
+                    </div>
+                    <div class="outcome-item">
+                        <div class="outcome-icon">📈</div>
+                        <h4>Customer-Centric Metrics</h4>
+                        <p>Every feature linked to measurable business outcomes</p>
+                    </div>
+                    <div class="outcome-item">
+                        <div class="outcome-icon">⚡</div>
+                        <h4>Speed + Quality</h4>
+                        <p>Fast delivery without compromising validation or customer value</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Expected Outcome -->
+        <section class="section outcome">
+            <h2 class="section-title" style="text-align: center">Expected Outcome</h2>
+            <figure>
+                <img src="amp2025_final.expected.png" alt="Expected Outcome Visualization">
+            </figure>
+            <p>A balanced, high-performance organization that achieves sustainable growth through the strategic integration of speed and discipline, resulting in enhanced team satisfaction, superior customer outcomes, and accelerated business growth.</p>
+        </section>
+    </main>
+</body>
+</html>
